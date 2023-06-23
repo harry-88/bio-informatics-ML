@@ -20,29 +20,7 @@ This is a Python Flask web application that classifies sequences using a Support
    cd sequence-classifier
    ```
 
-3. Create a virtual environment (optional but recommended) using the following command:
-
-   ```
-   python -m venv myenv
-   ```
-
-   This will create a virtual environment named `myenv` in the current directory.
-
-4. Activate the virtual environment. The command varies depending on your operating system:
-
-   - For Windows:
-
-     ```
-     myenv\Scripts\activate
-     ```
-
-   - For macOS and Linux:
-
-     ```
-     source myenv/bin/activate
-     ```
-
-5. Once the virtual environment is activated, install the required packages by running the following command:
+5. Install the required packages by running the following command:
 
    ```
    pip install -r requirements.txt
@@ -55,7 +33,6 @@ This is a Python Flask web application that classifies sequences using a Support
    ```
    python app.py
    ```
-
    The server should start running on `http://localhost:5000`.
 
 7. Open your web browser and navigate to `http://localhost:5000` to access the Sequence Classifier application.
