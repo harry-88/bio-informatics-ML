@@ -39,6 +39,7 @@
         text-align: left;
         display: none;
       }
+
     </style>
   </head>
   <body>
@@ -69,7 +70,9 @@
 
         <input type="text" id="responseData" class="form-control" readonly />
       </div>
+
     </div>
+
     <script>
       function classifySequence() {
         var sequence = document.getElementById("sequence").value;
@@ -87,15 +90,15 @@
               <!-- alert("Classification Result: " + data.result); -->
 
               document.getElementById("responseData").value =
-                "Your sequance lies in " + data.result;
+                "Your sequance lies in " + data.result+' sequance.';
             })
             .catch((error) => {
               document.getElementById("responseData").value =
                 "You may entered invalid sequance.";
-              console.error("Error:", error);
+              //console.error("Error:", error);
             });
         } else {
-          document.getElementById("responseData").value = "field is required.";
+          alert("Field is required.")
         }
       }
     </script>
