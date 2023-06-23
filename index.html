@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sequence Classifier</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-image: url("backgroundimg.jpg");
+        background-color: #cccccc;
+        background-repeat: repeat;
+        text-align: center;
+        width: 100%;
+        color: #cccccc;
+      }
+      .navContainer {
+        border: 2px solid #cccccc;
+        border-radius: 30px;
+      }
+      .navbarStyle {
+        background-color: transparent !important;
+        color: #cccccc !important;
+      }
+      .form {
+        width: 400px;
+      }
+      .field {
+        resize: none;
+        background-color: transparent;
+        color: #cccccc;
+      }
+
+      .responseDiv {
+        text-align: left;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navContainer">
+      <div class="container-fluid">
+        <span class="navbar-brand navbarStyle mb-0 h1"
+          >Sequence Classifier</span
+        >
+      </div>
+    </nav>
+    <div class="container form pt-4">
+      <h1 for="sequence">Enter sequence</h1>
+      <textarea
+        class="form-control field"
+        id="sequence"
+        rows="5"
+        cols="30"
+      ></textarea>
+      <button
+        class="form-control btn btn-outline-light mt-4"
+        onclick="classifySequence()"
+      >
+        Classify
+      </button>
+
+      <div id="responseDiv" class="mt-5 responseDiv">
+        <h5>Response is :</h5>
+
+        <input type="text" id="responseData" class="form-control" readonly />
+      </div>
+    </div>
+    <script>
+      function classifySequence() {
+        var sequence = document.getElementById("sequence").value;
+        if (sequence.length != 0) {
+          document.getElementById("responseDiv").style.display = "block";
+          fetch("http://localhost:5000/classify", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ sequence: sequence }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              <!-- alert("Classification Result: " + data.result); -->
+
+              document.getElementById("responseData").value =
+                "Your sequance lies in " + data.result;
+            })
+            .catch((error) => {
+              document.getElementById("responseData").value =
+                "You may entered invalid sequance.";
+              console.error("Error:", error);
+            });
+        } else {
+          document.getElementById("responseData").value = "field is required.";
+        }
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
